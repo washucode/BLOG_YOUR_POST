@@ -8,6 +8,7 @@ class User(UserMixin,db.Model):
     secondname = db.Column(db.String(255),nullable=False, unique=True)
     username = db.Column(db.String(255),nullable=False, unique=True)
     email = db.Column(db.String(255), nullable =False,unique=True)
+    profile_img = db.Column(db.String(255))
     password = db.Column(db.String(255),nullable = False)
 
     def save(self):
