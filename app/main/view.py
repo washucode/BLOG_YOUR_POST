@@ -16,4 +16,9 @@ def about():
     return render_template('about.html',title='About')
 
 
+@main.route('/subscribe')
+def subscribe():
+    return render_template('subcription.html',title='Subscribe')
+
+
 
