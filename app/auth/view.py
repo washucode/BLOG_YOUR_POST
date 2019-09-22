@@ -1,6 +1,7 @@
 from flask import render_template,redirect,url_for,flash,request
 from . import auth
 from flask_login import login_required,current_user
+import re
 
 
 
@@ -10,9 +11,21 @@ from flask_login import login_required,current_user
 
 @auth.route('/login',methods=['GET','POST'])
 def login():
-    
-    
-    
+    if request.method == 'POST':
+        form = request.form
+        username = form.get("username")
+        password = form.get("password")
+
+        user= User.query.filter_by(username=username).first()
+        if user == None :
+            error ="User with username does not exist"
+            return render_template('login.html', error = error)
+        is_correct_password = user.check_password(password)
+        if is_correct_password == False:
+            error ="User with  password does not exist"
+            return render_template('login.html', error=error)
+        login_user(user)
+        return redirect(url_for('main.index'))
     return render_template('login.html', title='Login')
 
 
@@ -32,17 +45,22 @@ def register():
         if password != confirm_password:
             error = "Not a match"
             return render_template('signup.html',error=error)
+        # for validating an Email 
+        regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
+        if re.match(regex,email)== None:
+            error = "Invalid Email.Please use correct email format"
+            return render_template('signup.html',error=error)
         else:
             user = User.query.filter_by(username= username).first()
             if user!= None:
-                error = "Username exitsts"
+                error = "Username exists"
                 return render_template('signup.html', error = error)
             user = User.query.filter_by(email=email).first()
-            if user!= None:
-                error = "Email exits"
+            if email!= None:
+                error = "Email exists"
                 return render_template('signup.html', error = error)
 
-            user = User(username=username,email=email)
+            user = User(firstname=firstname,secondname=secondname,username=username,email=email)
             user.set_password(password)
             user.save()
             return redirect(url_for("auth.login"))

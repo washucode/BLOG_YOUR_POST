@@ -8,17 +8,23 @@
                 <form class="border border-light p-5">
 
                         <p class="h4 mb-4 text-center">Sign up</p>
+                        {%if error%}
+                        <div class="alert alert-danger">
+                            {{error}}
+                        </div>
+                        {%endif%}
                     
-                        <input type="text" id="defaultRegisterFormFirstName" class="form-control  mb-4" placeholder="First name">
+                        <input type="text" name ="firstname" id="defaultRegisterFormFirstName" class="form-control  mb-4" placeholder="First name" required>
                     
-                        <input type="text" id="defaultRegisterFormLastName" class="form-control  mb-4" placeholder="Last name">
-                        <input type="text" id="defaultRegisterFormFirstName" class="form-control  mb-4" placeholder="User name">
+                        <input type="text" name = "secondname" id="defaultRegisterFormLastName" class="form-control  mb-4" placeholder="Last name" required>
+                        <input type="text" name = "username" id="defaultRegisterFormFirstName" class="form-control  mb-4" placeholder="User name" requires>
                     
-                        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+                        <input type="email" name = "email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" required>
                     
-                        <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                        <input type="password" name = "password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
                     
-                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">Minimal 8 characters lenght</small>
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">Minimal 8 characters length</small>
+                        <input type="password" name = "confirm_password" id="defaultRegisterFormPassword" class="form-control" placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
                     
                         <button class="btn btn-info my-4 btn-block pink darken-4" type="submit">Sign up</button>
                     
