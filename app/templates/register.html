@@ -5,15 +5,17 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-                <form class="border border-light p-5">
+                <form class="border border-light p-5" action='/registration' method='POST'>
+                        
 
                         <p class="h4 mb-4 text-center">Sign up</p>
-                        {%if error%}
+                        {% if error %}
                         <div class="alert alert-danger">
                             {{error}}
                         </div>
                         {%endif%}
                     
+                        
                         <input type="text" name ="firstname" id="defaultRegisterFormFirstName" class="form-control  mb-4" placeholder="First name" required>
                     
                         <input type="text" name = "secondname" id="defaultRegisterFormLastName" class="form-control  mb-4" placeholder="Last name" required>
