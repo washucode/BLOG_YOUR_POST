@@ -3,7 +3,9 @@
 {%block content%}
     {% for post in posts %}
     <div class="container mt-5">
-        <div class="col-md-2"></div>
+       
+        <div class="row">
+        
         <div class="col-md-8">
             
             <a class="mr-2" href="#">Author : {{ post.author|capitalize}}</a>
@@ -21,8 +23,18 @@
             <a class=" ml-5 " href="{{ url_for('main.post', post_id=post.id) }}">Comment</a>
         </div>
         
-        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <div class="card-body quote">
+                <h6>Random Quote: </h6>
+                <p class="card-text quote">"{{quote.quote}}"</p><br>
+                <small><p class="text-muted"> ~ {{quote.author|capitalize}} <small><a href="{{quote.permalink}}">view page</a></small></p></small>
+            </div>
+        </div>
     </div>
+    
+    </div>
+
+
     
 {% endfor %}
 
