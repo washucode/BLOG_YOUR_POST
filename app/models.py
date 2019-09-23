@@ -31,17 +31,16 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return "User:%s"%str(self.username)
 
-@login_manager.user_loader
-def user_loader(user_id):
-    return User.query.get(user_id)
+
 
 
 class Post(db.Model):
     __tablename__= 'posts'
     id = db.Column(db.Integer,primary_key= True)
-    title = db.Column(db.String(255),nullable=False, unique=True)
-    content= db.Column(db.String(255),nullable=False, unique=True)
-    post_img = db.Column(db.String(255))
+    title = db.Column(db.String(255),nullable=False)
+    content= db.Column(db.String(1500),nullable=False)
+    author = db.Column(db.String(255),nullable=False)
+    category = db.Column(db.String(255),nullable=False)
     date_posted = db.Column(db.DateTime, default = datetime.utcnow)   
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment', backref = 'post', lazy = 'dynamic')
@@ -54,7 +53,7 @@ class Post(db.Model):
         db.session.commit()
     
     def __repr__(self):
-        return "Post:%s"%str(self.content)
+        return "Post:%s"%str(self.title)
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -62,7 +61,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name =  db.Column(db.String(255),nullable=False, unique=True)
     email = db.Column(db.String(255), nullable =False,unique=True)
-    content = db.Column(db.String)          
+    content = db.Column(db.String(255))          
     date_posted = db.Column(db.DateTime, default = datetime.utcnow)    
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
@@ -73,5 +72,7 @@ class Comment(db.Model):
         db.session.delete(self)
         db.session.commit()
     
-
+@login_manager.user_loader
+def user_loader(user_id):
+    return User.query.get(user_id)
 
