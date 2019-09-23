@@ -17,15 +17,8 @@
             <a class=" nav-link active" href="{{ url_for('main.profile',username=current_user.username) }}"><img src="{{url_for('static', filename = current_user.profile_img)}}" alt="" style= "width:5%;height:auto;" ></a>
             {%else%}
             <a class="nav-item nav-link active" href="{{ url_for('main.displayposts') }}">Home</a>
-            <a class="nav-item nav-link active" href="{{ url_for('main.about') }}">About</a>
-            <a class="nav-item nav-link dropdown-toggle active" data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-                <div class="dropdown-menu  dropdown-primary justify-content-end" >
-                    <a class="dropdown-item"  href ="#">Tech</a>
-                    <a class="dropdown-item" href="">Cool Random Quotes</a>
-                    <a class="dropdown-item"  href="#"> All things life</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"> Want to write? Register</a>
-                </div>
+                   
+                
             {%endif%}
             </div>
             <!-- Navbar Right Side -->

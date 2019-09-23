@@ -1,55 +1,81 @@
 {%extends 'base.html'%}
 
 {% block content %}
- <div class="container mt-3">
-     <div class="col-md-3">
-
-     </div>
-     <div class="col-md-6">
-           
-                
-            <a class="mr-2" href="#">Author: {{ post.author|capitalize }}</a>
-            <small class="text-muted">Date: {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-            <small class="text-muted">Category: {{ post.category}}</small>
-                    
-                    
-            <h2 class="article-title">{{ post.title }}</h2>
-            <p class="article-content">{{ post.content }}</p>
-                 
+ <div class="container-fluid mt-5">
+     <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
             
-     </div>
-     {% if post.author != current_user.username %}
-     <div class="col-md-6 mb-2">
-        <div class="card">
-
-            <div class="card-body px-lg-5 pt-0 ">
-                
-                <form class="md-form" style="color: #757575;" action = "/comment/{{post.id}}" method = 'POST'>
-            
-                    <input type="text" name = "name" id="input" class="form-control" placeholder="Your Name" required>
-        
-                    <input type="email" name = "email" id="emailInput" class="form-control" placeholder=" Your Email" required>
-        
-                    <textarea class="form-control md-textarea" id="textarea" name = "content" placeholder="Your message...."></textarea>
-        
-                    <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Send Message</button>
-                   
                     
+                <a class="mr-2" href="#">Author: {{ post.author|capitalize }}</a>
+                <small class="text-muted">Date: {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                <small class="text-muted">Category: {{ post.category}}</small>
+                        
+                        
+                <h2 >{{ post.title }}</h2>
+                <p>{{ post.content }}</p>
+                {% if post.author == current_user.username %}
+                  
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1 pink darken-4" href="{{ url_for('main.update_post', post_id=post.id) }}">Update</a>
+                    <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                
+                {% endif %}  
+                    
+                
+        </div>
+        <div class="col-md-4 mt-5">
+            {%if comments%}
+            <h5><strong>Comments</strong></h5>
+            {%for comment in comments%}
+            
+            <h6>Posted by: {{comment.name|capitalize}}</h6>
+            <small>Date Posted: {{comment.date_posted.strftime('%Y-%m-%d')}}</small>
+            <p>{{comment.content}}</p>
+            {%if post.author == current_user.username%}
+                <form action="{{ url_for('main.delete_comment', post_id=post.id) }}" method="POST">
+                    <input class="btn btn-danger btn-sm" type="submit" value="Delete">
                 </form>
-            </div>
+    
+            {%endif%}
+            {%endfor%}
+            {%endif%}
+           
         </div>
         
-     </div>
+    </div>
+ </div>
+     {% if post.author != current_user.username %}
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+                <div class="card">
+
+                        <div class="card-body px-lg-5 pt-0 ">
+                            
+                            <form class="md-form" style="color: #757575;" action = "/post/{{post.id}}" method = 'POST'>
+                        
+                                <input type="text" name = "name" id="input" class="form-control" placeholder="Your Name" required>
+                    
+                                <input type="email" name = "email" id="emailInput" class="form-control" placeholder=" Your Email" required>
+                    
+                                <textarea class="form-control md-textarea" id="textarea" name = "content" placeholder="Your message...."></textarea>
+                    
+                                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Send Message</button>
+                               
+                                
+                            </form>
+                        </div>
+                    </div>
+                   
+        </div>
+        <div class="col-md-8"></div>
+    </div>
+</div>
+  
      {% endif %}
-     {%if comment%}
-    <small>{{comment.name}} <small>{{comment.date_posted.strftime('%Y-%m-%d')}}</small></small>
-    <small>{{comment.content}}</small>
-    {%endif%}
-    {%if post.author == current_user.username and comment%}
-    <form action="{{ url_for('main.delete_comment', post_id=post.id) }}" method="POST">
-        <input class="btn btn-danger" type="submit" value="Delete">
-    </form>
-    {%endif%}
+     
+    
 
      
                
@@ -73,12 +99,7 @@
             </div>
         </div>
 
-        {% if post.author == current_user.username %}
-        <div>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1 pink darken-4" href="{{ url_for('main.update_post', post_id=post.id) }}">Update</a>
-            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
-        </div>
-    {% endif %}   
+         
         
 
      </div>

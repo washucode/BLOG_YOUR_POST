@@ -1,10 +1,30 @@
-.dropdown-menu {
-    margin-left: 25%;
-    width:15%;
-
-}
+@import url('https://fonts.googleapis.com/css?family=Chilanka&display=swap');
 
 .bg-dark{
     background-color: #1C2331;
 }
+
+.heading{
+    margin-top:10%;
+    
+}
+
+.heading h1{
+    letter-spacing:2px;
+    font-family: 'Chilanka', cursive;
+    font-size: 60px;
+}
+.heading p{
+    letter-spacing:2px;
+    font-family: 'Chilanka', cursive;
+    font-size: 20px;
+}
+.speh{
+  font-size: 70px;
+}
+
+.heading a{
+    margin-left:40%;
+}
+
 

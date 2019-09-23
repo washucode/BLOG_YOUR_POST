@@ -10,8 +10,7 @@ from .. import db,photos
 @main.route('/')
 def home():
    
-   
-    return render_template('display_posts.html')
+    return render_template('index.html')
 
 @main.route('/display_all', methods= ['POST','GET'])
 def displayposts():
@@ -87,10 +86,11 @@ def delete_post(post_id):
 @main.route("/post/<int:post_id>")
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post.title, post=post)
+    comments = Comment.query.filter_by(post_id = post_id)
+    return render_template('post.html', title=post.title, post=post,comments=comments)
 
 
-@main.route('/comment/<int:post_id>',methods= ['POST','GET'])
+@main.route('/post/<int:post_id>',methods= ['POST','GET'])
 
 def comment(post_id):
     if request.method == 'POST':
@@ -107,16 +107,17 @@ def comment(post_id):
             comment.save_comment()
             comments= Comment.query.filter_by(post_id=post_id).all()
             post = Post.query.get_or_404(post_id)
-            return render_template('post.html',comment=comment,post=post) 
+            return render_template('post.html',comments=comments,post=post) 
+    return render_template('post.html',comments=comments,post=post) 
 
 @main.route('/delete_comment/<int:post_id>',methods= ['POST','GET'])
 @login_required
 def delete_comment(post_id):
     comment= Comment.query.filter_by(post_id = post_id).first()
-    post.delete_comment()
+    comment.delete_comment()
     
     
-    return redirect(url_for('main.displayposts'))          
+    return redirect(url_for('main.post',post_id=post_id))          
     
 
 
