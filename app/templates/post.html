@@ -6,45 +6,83 @@
 
      </div>
      <div class="col-md-6">
-            <div class="media-body">
-                    <div >
-                      <a class="mr-2" href="#">Author: {{ post.author|capitalize }}</a>
-                      <small class="text-muted">Date: {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-                      <small class="text-muted">Category: {{ post.category}}</small>
-                      
-                    </div>
-                    <h2 class="article-title">{{ post.title }}</h2>
-                    <p class="article-content">{{ post.content }}</p>
-                  </div>
-                  {% if post.author == current_user.username %}
-                        <div>
-                          <a class="btn btn-secondary btn-sm mt-1 mb-1 pink darken-4" href="{{ url_for('main.update_post', post_id=post.id) }}">Update</a>
-                          <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
-                        </div>
-                  {% endif %}
+           
+                
+            <a class="mr-2" href="#">Author: {{ post.author|capitalize }}</a>
+            <small class="text-muted">Date: {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            <small class="text-muted">Category: {{ post.category}}</small>
+                    
+                    
+            <h2 class="article-title">{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }}</p>
+                 
+            
+     </div>
+     {% if post.author != current_user.username %}
+     <div class="col-md-6 mb-2">
+        <div class="card">
+
+            <div class="card-body px-lg-5 pt-0 ">
+                
+                <form class="md-form" style="color: #757575;" action = "/comment/{{post.id}}" method = 'POST'>
+            
+                    <input type="text" name = "name" id="input" class="form-control" placeholder="Your Name" required>
+        
+                    <input type="email" name = "email" id="emailInput" class="form-control" placeholder=" Your Email" required>
+        
+                    <textarea class="form-control md-textarea" id="textarea" name = "content" placeholder="Your message...."></textarea>
+        
+                    <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Send Message</button>
+                   
+                    
+                </form>
+            </div>
+        </div>
+        
+     </div>
+     {% endif %}
+     {%if comment%}
+    <small>{{comment.name}} <small>{{comment.date_posted.strftime('%Y-%m-%d')}}</small></small>
+    <small>{{comment.content}}</small>
+    {%endif%}
+    {%if post.author == current_user.username and comment%}
+    <form action="{{ url_for('main.delete_comment', post_id=post.id) }}" method="POST">
+        <input class="btn btn-danger" type="submit" value="Delete">
+    </form>
+    {%endif%}
+
+     
                
-                <!-- Modal -->
-                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
-                        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn pink darken-4" data-dismiss="modal">Cancel</button>
-                        <form action="{{ url_for('main.delete_post', post_id=post.id) }}" method="POST">
-                          <input class="btn btn-danger" type="submit" value="Delete">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+                <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 </div>
+                <div class="modal-footer">
+                <button type="button" class="btn pink darken-4" data-dismiss="modal">Cancel</button>
+                <form action="{{ url_for('main.delete_post', post_id=post.id) }}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        {% if post.author == current_user.username %}
+        <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1 pink darken-4" href="{{ url_for('main.update_post', post_id=post.id) }}">Update</a>
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        </div>
+    {% endif %}   
+        
 
      </div>
-     <div class="col-md-3"></div>
+     
  </div>
     
 {% endblock%}

@@ -3,8 +3,8 @@
 {%block content%}
     {% for post in posts %}
     <div class="container mt-5">
-        <div class="col-md-8"></div>
-        <div class="col-md-2">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
             
             <a class="mr-2" href="#">Author : {{ post.author|capitalize}}</a>
             <small class="text-muted"> Date: {{ post.date_posted.strftime('%Y-%m-%d') }} </small>
@@ -16,10 +16,12 @@
             
             
             <a class=" " href="{{ url_for('main.post', post_id=post.id) }}">See More ...</a>
+            
+            
             <a class=" ml-5 " href="{{ url_for('main.post', post_id=post.id) }}">Comment</a>
         </div>
         
-        <div class="col-md"></div>
+        <div class="col-md-2"></div>
     </div>
     
 {% endfor %}
