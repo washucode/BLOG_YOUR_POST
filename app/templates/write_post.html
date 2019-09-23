@@ -1,0 +1,57 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+                <div class="card">
+
+                        <h5 class="card-header pink darken-4 white-text text-center py-4">
+                            <strong>Create a Post</strong>
+                        </h5>
+                    
+                        <!--Card content-->
+                        <div class="card-body px-lg-5 pt-0">
+                    
+                            <!-- Form -->
+                            <form class="text-center" style="color: #757575;" action="#!">
+                    
+                                <!-- Name -->
+                                <div class="md-form mt-3">
+                                    <input type="text" id="materialContactFormName" class="form-control" name = "title">
+                                    <label for="materialContactFormName" >Title</label>
+                                </div>
+                    
+                                
+                                <span>Category</span>
+                                <select class="mdb-select">
+                                    <option value="" disabled>Choose option</option>
+                                    <option value="1" selected>All things life</option>
+                                    <option value="2">Tech</option>
+                                
+                                </select>
+                    
+                                
+                                <div class="md-form">
+                                    <textarea id="materialContactFormMessage" class="form-control md-textarea" rows="5" name ="content" placeholder="write post ..."></textarea>
+                                   
+                                </div>
+                    
+                                
+                    
+                                <!-- Send button -->
+                                <button class="btn  btn-rounded btn-block z-depth-0 my-4 waves-effect pink darken-4" type="submit">Post</button>
+                    
+                            </form>
+                            <!-- Form -->
+                    
+                        </div>
+                    
+                    </div>    
+                
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+    
+{%endblock%}

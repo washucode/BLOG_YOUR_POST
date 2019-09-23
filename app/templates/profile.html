@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card profile-card mt-2">
+                        {% if user.profile_img %}
+                        <div class="card-img-block " style=" padding-left:25%;">
+                                <img class="card-img-top"  src="{{url_for('static', filename = user.profile_img)}}"  alt="profile image" style= "width:60%;height:2%;"   class="img-rounded img-responsive text-center">
+    
+                        </div>
+                        {%else%}
+                        <div  class="card-img-block " style=" padding-left:25%;">
+                                <img class="card-img-top"  src="{{url_for('static', filename = 'images/default.jpg')}}" alt="" style= "width:60%;height:2%; text-align: center;"  class="img-rounded img-responsive text-center" >
+                        </div>
+                        {%endif%}
+                        <div class="card-body text-center">
+                                {% if user == current_user %}
+                                <h5 class="card-title"><strong> {{current_user.username | capitalize}}</strong></h5>
+                                <h6 class="card-title">E-mail : {{current_user.email}}</h6>
+                                {%endif%}
+        
+                        </div>
+                        
+                        {% if user == current_user %}
+                        <form  action="{{url_for('main.update_profile_pic',username=user.username)}}" method="post" enctype = "multipart/form-data" class=" text-center">
+                            <h6><strong> Change Profile Picture</strong> </h6>
+                           
+                                    <div class="btn pink darken-4 btn-sm  ">
+                                        
+                                        <input type="file" id="fileInput" name = 'photo'>
+                                    </div>
+                                    <input type="submit" class = "btn pink darken-4 btn-sm" >
+                         
+                        </form>
+                        {% endif %}
+                        
+                         
+                        
+    
+    
+                </div>
+    
+            </div>
+        
+    </div>
+    
+{%endblock%}
