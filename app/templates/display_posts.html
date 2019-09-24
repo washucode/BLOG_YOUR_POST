@@ -14,7 +14,7 @@
                     
             <hr>
             <h2><a class="" href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h2>
-            <p class="">{{ post.content }}</p>
+            <p class="">{{ post.content|truncate(500) }}</p>
             
             
             <a class=" " href="{{ url_for('main.post', post_id=post.id) }}">See More ...</a>
@@ -22,7 +22,7 @@
             
             <a class=" ml-5 " href="{{ url_for('main.post', post_id=post.id) }}">Comment</a>
         </div>
-        
+        {% endfor %}
         <div class="col-md-4">
             <div class="card-body quote">
                 <h6>Random Quote: </h6>
@@ -36,6 +36,6 @@
 
 
     
-{% endfor %}
+
 
 {%endblock%}
