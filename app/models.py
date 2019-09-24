@@ -71,11 +71,16 @@ class Comment(db.Model):
     def delete_comment(self):
         db.session.delete(self)
         db.session.commit()
+
+
 class Quotes:
   def __init__ (self,author,quote,permalink):
     self.author = author
     self.quote = quote
-    self.permalink = permalink
+    self.permalink = permalinkdef test_save_post(self):
+        self.new_post.save_post()
+        self.assertTrue(len(Post.query.all()),1)
+
     
 @login_manager.user_loader
 def user_loader(user_id):

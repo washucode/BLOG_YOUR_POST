@@ -9,6 +9,11 @@
 
                         <div class="text-center">
                             <p class="h4 mb-4">Subscribe</p>
+                            {% if error %}
+                            <div class="alert alert-danger">
+                                {{error}}
+                            </div>
+                            {%endif%}
                     
                             <p>Join our mailing list. We write ronly the best content.</p>
                     
