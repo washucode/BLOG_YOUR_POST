@@ -6,7 +6,7 @@ class test_postModel(unittest.TestCase):
     # to test behaivours in the post model
 
     def setUp(self):
-        self.user_Me = User(firstname ='Her', secondname = 'her2'username = 'Me', password = 'Herme', email = 'her@gmail.com')
+        self.user_Me = User(firstname ='Hermr', secondname = 'her2',username = 'Me', password = 'Herme', email = 'hermemere@gmail.com')
         self.new_post = Post(title = 'test', content = 'testing is important',user_id =  1, category = 'interview',author='Me')
 
     def test_check_instance_variables(self):

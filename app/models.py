@@ -77,9 +77,8 @@ class Quotes:
   def __init__ (self,author,quote,permalink):
     self.author = author
     self.quote = quote
-    self.permalink = permalinkdef test_save_post(self):
-        self.new_post.save_post()
-        self.assertTrue(len(Post.query.all()),1)
+    self.permalink = permalinkdef
+    
 
     
 @login_manager.user_loader

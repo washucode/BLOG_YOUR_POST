@@ -19,7 +19,7 @@ manager.add_command('db',MigrateCommand)
 def add_shell_context():
     return {'db': db, 'User':User, 'Post':Post, 'Comment':Comment}
 
-@manager.MigrateCommand
+@manager.command
 def test():
     import unittest
     test=unittest.TestLoader().discover("Test")
