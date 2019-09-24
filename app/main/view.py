@@ -25,9 +25,9 @@ def displayposts():
      return render_template('display_posts.html',posts=posts,quote=quote)
 
 
-@main.route('/about')
-def about():
-    return render_template('about.html',title='About')
+# @main.route('/about')
+# def about():
+#     return render_template('about.html',title='About')
 
 
 @main.route('/subscribe')

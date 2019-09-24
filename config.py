@@ -7,13 +7,13 @@ class Config(object):
      TESTING = False
      QUOTES_API = 'http://quotes.stormconsultancy.co.uk/random.json'
      SECRET_KEY = '435313ea80b5a872114356a1'
-     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    
      UPLOADED_PHOTOS_DEST='app/static/photos'
     
      
 
 class ProductionConfig(Config):
-    DEBUG = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
 class StagingConfig(Config):
@@ -24,6 +24,7 @@ class StagingConfig(Config):
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://esther:p@localhost/blog"
 
 
 class TestingConfig(Config):
@@ -31,5 +32,7 @@ class TestingConfig(Config):
 
 
 config_options = {
-'test':TestingConfig
+'test':TestingConfig,
+'production':ProductionConfig,
+'development': DevelopmentConfig
 }

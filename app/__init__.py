@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from config import Config
+from config import config_options
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 # from flask_bootstrap import Bootstrap
@@ -18,10 +18,11 @@ login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 
-def  create_app():
+def  create_app(Configname):
 
  
-    app.config.from_object(os.environ['APP_SETTINGS'])
+    app.config.from_object(config_options[Configname])
+    # app.config.from_object(os.environ['APP_SETTINGS'])
 
     # initialize extensions
     login_manager.init_app(app)
