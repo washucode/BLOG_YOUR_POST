@@ -21,7 +21,7 @@ login_manager.login_view = 'auth.login'
 def  create_app():
 
  
-    # app.config.from_object(os.environ['APP_SETTINGS'])
+    app.config.from_object(os.environ['APP_SETTINGS'])
 
     # initialize extensions
     login_manager.init_app(app)
