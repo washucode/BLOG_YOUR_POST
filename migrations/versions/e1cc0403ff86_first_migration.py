@@ -1,8 +1,8 @@
-"""Deployment
+"""first migration
 
-Revision ID: 0de237d98250
-Revises: e0b86329e746
-Create Date: 2019-09-24 03:45:06.362254
+Revision ID: e1cc0403ff86
+Revises: 
+Create Date: 2019-09-24 11:49:49.990724
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0de237d98250'
-down_revision = 'e0b86329e746'
+revision = 'e1cc0403ff86'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -36,7 +36,7 @@ def upgrade():
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=255), nullable=False),
-    sa.Column('content', sa.String(length=1500), nullable=False),
+    sa.Column('content', sa.Text(), nullable=False),
     sa.Column('author', sa.String(length=255), nullable=False),
     sa.Column('category', sa.String(length=255), nullable=False),
     sa.Column('date_posted', sa.DateTime(), nullable=True),
@@ -48,7 +48,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
-    sa.Column('content', sa.String(length=255), nullable=True),
+    sa.Column('content', sa.String(length=1000), nullable=True),
     sa.Column('date_posted', sa.DateTime(), nullable=True),
     sa.Column('post_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),

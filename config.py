@@ -24,7 +24,7 @@ class StagingConfig(Config):
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://esther:p@localhost/blog"
+    SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://esther:p@localhost/newblog"
 
 
 class TestingConfig(Config):
