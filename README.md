@@ -1,7 +1,7 @@
 # Blog_Your_Post
 
 ### By Esther Wachuka 
-- An app that allows users to make 60 sec pitches in different categories
+- An app that allows users view posts and writers to make posts
 
 ## installation
  #### In Your Terminal:
