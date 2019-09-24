@@ -13,6 +13,7 @@ def home():
    
     return render_template('index.html')
 
+
 @main.route('/display_all', methods= ['POST','GET'])
 def displayposts():
      posts = Post.query.all()
